@@ -8,12 +8,14 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -33,10 +35,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.vector.DefaultTintColor
+import androidx.compose.ui.layout.ContentScale
 
 @Composable
 fun Tweet(){
-    Column {
+    Column(Modifier.fillMaxSize().background(Color.Black)) {
         TweetBody()
         Spacer(modifier = Modifier.size(8.dp))
         TweetFooter()
@@ -73,26 +76,6 @@ fun TweetDetail() {
 }
 
 @Composable
-fun TweetImage() {
-    Image(
-        painter = painterResource(id = R.drawable.profile),
-        contentDescription = "Image",
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(top = 8.dp)
-    )
-}
-
-@Composable
-fun TweetMessage() {
-    Text(
-        text = "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit",
-        modifier = Modifier.padding(start = 16.dp, top = 4.dp),
-        fontSize = 14.sp,
-    )
-}
-
-@Composable
 fun TweetAccount() {
     Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Start) {
         Row(){
@@ -100,7 +83,8 @@ fun TweetAccount() {
                 text = "Jorge",
                 modifier = Modifier.padding(start = 16.dp),
                 fontWeight = FontWeight.Bold,
-                fontSize = 14.sp
+                fontSize = 14.sp,
+                color = Color.White
             )
             Text(
                 text = "@Jorgila",
@@ -125,6 +109,29 @@ fun TweetAccount() {
 }
 
 @Composable
+fun TweetMessage() {
+    Text(
+        text = "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit",
+        modifier = Modifier.padding(start = 16.dp, top = 4.dp),
+        fontSize = 14.sp,
+        color = Color.White
+    )
+}
+
+@Composable
+fun TweetImage() {
+    Image(
+        painter = painterResource(id = R.drawable.profile),
+        contentDescription = "Image",
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = 8.dp)
+            .clip(RoundedCornerShape(10)),
+        contentScale = ContentScale.Crop
+    )
+}
+
+@Composable
 fun TweetFooter() {
     Row (Modifier.fillMaxWidth()){
         Row(Modifier.weight(1f), horizontalArrangement = Arrangement.Center){
@@ -139,12 +146,15 @@ fun TweetFooter() {
                         painterResource(id = R.drawable.ic_chat)
                     },
                 contentDescription = "Comments",
-                modifier = Modifier.clickable { comments = !comments })
+                modifier = Modifier.clickable { comments = !comments },
+                tint = Color.White)
 
             if(comments){
-                Text(text="2")
+                Text(text="2",
+                    color = Color.White)
             } else {
-                Text(text="1")
+                Text(text="1",
+                    color = Color.White)
             }
 
         }
@@ -156,12 +166,14 @@ fun TweetFooter() {
                 painter = painterResource(id = R.drawable.ic_rt),
                 contentDescription = "retweet",
                 modifier = Modifier.clickable { retweet = !retweet },
-                tint = if(retweet){ Color.Blue } else { Color.Black }
+                tint = if(retweet){ Color.Blue } else { Color.White }
             )
             if(retweet){
-                Text(text="2")
+                Text(text="2",
+                    color = Color.White)
             } else {
-                Text(text="1")
+                Text(text="1",
+                    color = Color.White)
             }
         }
         Row(Modifier.weight(1f), horizontalArrangement = Arrangement.Center){
@@ -177,12 +189,14 @@ fun TweetFooter() {
                     },
                 contentDescription = "like",
                 modifier = Modifier.clickable { like = !like },
-                tint = if(like){ Color.Red } else { Color.Black }
+                tint = if(like){ Color.Red } else { Color.White }
             )
             if(like){
-                Text(text="2")
+                Text(text="2",
+                    color = Color.White)
             } else {
-                Text(text="1")
+                Text(text="1",
+                    color = Color.White)
             }
         }
 
